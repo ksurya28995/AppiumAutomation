@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertyManager{
-	final static public String fileName = "androidConfig.properties";
+	static public String fileName = "androidConfig.properties";
 	static Properties prop = new Properties();
 	static InputStream input = null;
 	
