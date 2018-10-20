@@ -16,6 +16,7 @@ public class Android {
 	public static AndroidDriver initDriver(String appName) throws MalformedURLException, InterruptedException {
 		driver = new AndroidDriver(new URL(PropertyManager.getPropertyValue("androiddriverurl")),
 				getDrivCapabilities(appName));
+		Thread.sleep(5000);
 		return driver;
 	}
 
