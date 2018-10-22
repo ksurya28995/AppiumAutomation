@@ -145,7 +145,7 @@ public class ElementAction {
 		pt.x = pt.getX() + 10;
 		pt.y = pt.getY() + 10;
 		while (!isExist() && noOfScroll > 0) {
-			System.out.println("scrolling");
+			System.err.println("scrolling to find the element...");
 			act.press(pt.getX() + 250, pt.getY()).waitAction(Duration.ofMillis(500)).moveTo(pt.getX(), pt.getY())
 					.release().perform();
 			noOfScroll--;
