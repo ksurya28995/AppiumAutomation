@@ -19,7 +19,7 @@ public class iReffTest {
 	@Test
 	public void startingTest() throws Exception {
 		ireff_Implements appObj = new ireff_Implements();
-		appObj.validNewOperatorsList("validLists.csv");
+		appObj.validIreff("validLists.csv");
 	}
 
 	@AfterClass

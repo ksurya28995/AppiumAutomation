@@ -1,15 +1,8 @@
 package AppiumCore;
 
-import io.appium.java_client.android.AndroidDriver;
-
 public class ElementFinder {
 
-	private String locator = "new UiSelector()";
-	private static AndroidDriver driver;
-
-	public ElementFinder() {
-		driver = Android.driver;
-	}
+	public static String locator = "new UiSelector()";
 
 	public ElementFinder resourceId(String value) {
 		locator += ".resourceId(\"" + value + "\")";
@@ -26,6 +19,11 @@ public class ElementFinder {
 		return this;
 	}
 
+	public ElementFinder contDesc(String value) {
+		locator += ".description(\""+value+"\")";
+		return this;
+	}
+	
 	public ElementFinder xpath(String path) throws InterruptedException {
 		locator = locator.replaceAll("new UiSelector()", "");
 		locator = path;
