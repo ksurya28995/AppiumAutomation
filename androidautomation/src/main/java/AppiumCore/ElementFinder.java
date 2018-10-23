@@ -31,6 +31,7 @@ public class ElementFinder {
 	}
 
 	public ElementAction makeUiElement() {
+		ElementAction.startTime = 0;
 		return new ElementAction(locator);
 	}
 }

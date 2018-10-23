@@ -13,9 +13,11 @@ import io.appium.java_client.TouchAction;
 public class ElementAction {
 
 	public static String EAlocator;
+	public static long startTime;
 	public static Date time = new Date();
 
 	public ElementAction(String _locator) {
+		startTime = 0;
 		EAlocator = _locator;
 	}
 
@@ -32,12 +34,19 @@ public class ElementAction {
 		waitForElement();
 		if (EAlocator.contains("new UiSelector()")) {
 			return Android.driver.findElementByAndroidUIAutomator(EAlocator);
-
 		} else {
 			return Android.driver.findElementByXPath(EAlocator);
 		}
 	}
 
+	public WebElement getElementByXpath(String xpath) throws Exception {
+		String tempEAlocator = EAlocator;
+		EAlocator = xpath;
+		WebElement xpathElem = getElement();
+		EAlocator = tempEAlocator;
+		return xpathElem;
+	}
+	
 	public List<WebElement> getElements() throws Exception {
 		ElementFinder.locator = "new UiSelector()";
 		return Android.driver.findElementsByXPath(EAlocator);
@@ -104,8 +113,6 @@ public class ElementAction {
 		}
 	}
 
-	public static long startTime = 0;
-
 	public static long startTime() {
 		time = new Date();
 		if (startTime == 0)
@@ -139,18 +146,16 @@ public class ElementAction {
 		action.moveTo(getElement()).perform();
 	}
 
-	public ElementAction scrollLeftToElem(String scrollElemXpath, int noOfScroll) throws Exception {
+	public void scrollLeftToElem(String scrollElemXpath, int noOfScroll) throws Exception {
 		TouchAction act = new TouchAction(Android.driver);
-		Point pt = Android.driver.findElementByXPath(scrollElemXpath).getLocation();
+		Point pt = getElementByXpath(scrollElemXpath).getLocation();
 		pt.x = pt.getX() + 10;
 		pt.y = pt.getY() + 10;
 		while (!isExist() && noOfScroll > 0) {
 			System.err.println("scrolling to find the element...");
-			act.press(pt.getX() + 250, pt.getY()).waitAction(Duration.ofMillis(500)).moveTo(pt.getX(), pt.getY())
+			act.press(pt.getX() + 250, pt.getY()).waitAction(Duration.ofMillis(1000)).moveTo(pt.getX(), pt.getY())
 					.release().perform();
 			noOfScroll--;
 		}
-
-		return new ElementAction(EAlocator);
 	}
 }
