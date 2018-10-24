@@ -22,9 +22,9 @@ public class ireff_Implements {
 	}
 
 	public void validIreff() throws Exception {
-		// validNewOperatorsList("validLists.csv");
-		// validOperaTabs("validLists.csv");
-		validTabData("validTabData.csv");
+		 validNewOperatorsList("validLists.csv");
+		 validOperaTabs("validLists.csv");
+		// validTabData("validTabData.csv");
 	}
 
 	public void validNewOperatorsList(String supportCSV) throws Exception {
@@ -87,37 +87,70 @@ public class ireff_Implements {
 		List<WebElement> packs = null;
 		String eachPackPath = null;
 		String packPricePath = null;
-		String packPrice = null;
+		String packPrice = "";
 		List<WebElement> eachPack = null;
 		boolean flag;
+		boolean isScrollEnds;
+		String temp = null;
+		String lastPackPrice = null;
+		String lastPackPricePath = null;
+		int packSize = 0;
 		for (int i = 0; i < tabLists.length; i++) {
+			isScrollEnds = false;
 			elem.resourceId("android:id/text1").text(tabLists[i]).makeUiElement().tap();
+			Thread.sleep(1000);
 			packs = elem.resourceId("in.ireff.android:id/resultLayout").makeUiElement().getElements();
-			for (int j = 0; j < packs.size() - 1; j++) {
-				eachPackPath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/resultLayout\"][@index='"
-						+ j + "']//android.widget.TextView[@resource-id=\"in.ireff.android:id/tag\"]";
-				eachPack = elem.xpath(eachPackPath).makeUiElement().getElements();
-				flag = false;
-				for (WebElement eachElem : eachPack) {
-					if (tabLists[i].equalsIgnoreCase("Topup"))
-						if (eachElem.getText().equalsIgnoreCase(tabLists[i])
-								|| eachElem.getText().equalsIgnoreCase("FULL TT")) {
-							flag = true;
-							break;
+			packSize = packs.size();
+			for (; !isScrollEnds; ) {
+				for (int j = 0; j < packSize; j++) {
+					eachPackPath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/resultLayout\"][@index='"
+							+ j + "']//android.widget.TextView[@resource-id=\"in.ireff.android:id/tag\"]";
+					eachPack = elem.xpath(eachPackPath).makeUiElement().getElements();
+					if (j == (packs.size()-2)) {
+						temp = eachPackPath;
+					}
+					System.out.println(eachPack.size());
+					flag = false;
+					for (WebElement eachElem : eachPack) {
+						if (tabLists[i].equalsIgnoreCase("Topup")) {
+							if (eachElem.getText().equalsIgnoreCase(tabLists[i])
+									|| eachElem.getText().equalsIgnoreCase("FULL TT")) {
+								flag = true;
+								break;
+							}
 						} else {
-							if (eachElem.getText().equalsIgnoreCase(tabLists[i])) {
+							if (eachElem.getText().toLowerCase().contains(tabLists[i].toLowerCase())) {
 								flag = true;
 								break;
 							}
 						}
+					}
+					if (eachPack.size() == 0) {
+						flag = true;
+					} else {
+						packPricePath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/resultLayout\"][@index='"
+								+ j + "']//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"]";
+						packPrice = elem.xpath(packPricePath).makeUiElement().getText();
+					}
+					if (!flag) {
+						Assert.fail("Category is missing for Rs." + packPrice + " pack");
+					}
+					System.out.println("Passed: " + packPrice);
 				}
-				packPricePath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/resultLayout\"][@index='"
-						+ j + "']//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"]";
-				packPrice = elem.xpath(packPricePath).makeUiElement().getText();
-				if (!flag) {
-					Assert.fail("Category is missing for Rs." + packPrice + " pack");
+				isScrollEnds = elem.xpath(temp).makeUiElement().scrollDownTillDisappears("//android.widget.ListView[@resource-id=\"android:id/list\"]");
+				packs = elem.resourceId("in.ireff.android:id/resultLayout").makeUiElement().getElements();
+				packSize = packs.size();
+				System.out.println("packSize: "+packSize);
+				lastPackPricePath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/resultLayout\"][@index='"
+						+ (packs.size() - 1)+ "']//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"]";
+				lastPackPrice = elem.xpath(lastPackPricePath).makeUiElement().getText();
+				System.out.println("yes: "+lastPackPrice);
+				System.out.println("no: "+packPrice);
+				if(packPrice.equals(lastPackPrice)) {
+					isScrollEnds = true;
 				}
-				System.out.println("Passed: " + packPrice);
+				
+				
 			}
 		}
 	}

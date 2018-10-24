@@ -162,4 +162,23 @@ public class ElementAction {
 			noOfScroll--;
 		}
 	}
+	
+	public boolean scrollDownTillDisappears(String scrollElemXpath) throws Exception {
+		System.out.println("scrolling");
+		int noOfScroll = 6;
+		TouchAction act = new TouchAction(Android.driver);
+		Point pt = getElementByXpath(scrollElemXpath).getLocation();
+		pt.x = pt.getX() + 10;
+		pt.y = pt.getY() + 10;
+		while (isExist() && noOfScroll > 0) {
+			System.err.println("scrolling till the element disappears...");
+			act.press(pt.getX(), pt.getY()+ 250).waitAction(Duration.ofMillis(1000)).moveTo(pt.getX(), pt.getY())
+					.release().perform();
+			noOfScroll--;
+		}
+		return false;
+	}
+	
+	
+	
 }
