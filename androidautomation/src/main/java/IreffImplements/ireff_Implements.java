@@ -3,10 +3,14 @@ package IreffImplements;
 import static junit.framework.Assert.assertTrue;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.openqa.selenium.WebElement;
 
 import AppiumCore.CsvHandler;
 import AppiumCore.ElementFinder;
+import junit.framework.Assert;
 
 public class ireff_Implements {
 	private static CsvHandler csvObj = null;
@@ -17,10 +21,10 @@ public class ireff_Implements {
 		csvObj = new CsvHandler();
 	}
 
-	public void validIreff(String supportCSV) throws Exception {
-		// validNewOperatorsList(supportCSV);
-		validOperaTabs(supportCSV);
-
+	public void validIreff() throws Exception {
+		// validNewOperatorsList("validLists.csv");
+		// validOperaTabs("validLists.csv");
+		validTabData("validTabData.csv");
 	}
 
 	public void validNewOperatorsList(String supportCSV) throws Exception {
@@ -67,12 +71,53 @@ public class ireff_Implements {
 				for (int j = 0; j < csvTabNames.length; j++) {
 					if (!elem.resourceId("android:id/text1").text(csvTabNames[j]).makeUiElement().isExist()) {
 						elem.resourceId("android:id/text1").text(csvTabNames[j]).makeUiElement()
-								.scrollLeftToElem(tabPath, 5);
+								.scrollLeftByCount(tabPath, 5);
 					}
 					uiTabName = elem.resourceId("android:id/text1").text(csvTabNames[j]).makeUiElement().getText();
 					assertTrue("Some Tab were missing", csvTabNames[j].contains(uiTabName));
 					System.out.println(csvTabNames[j]);
 				}
+			}
+		}
+	}
+
+	public void validTabData(String supportCSV) throws Exception {
+		arrData = csvObj.readCsvData(supportCSV);
+		String[] tabLists = arrData.get("IdeaTabNames").split("@");
+		List<WebElement> packs = null;
+		String eachPackPath = null;
+		String packPricePath = null;
+		String packPrice = null;
+		List<WebElement> eachPack = null;
+		boolean flag;
+		for (int i = 0; i < tabLists.length; i++) {
+			elem.resourceId("android:id/text1").text(tabLists[i]).makeUiElement().tap();
+			packs = elem.resourceId("in.ireff.android:id/resultLayout").makeUiElement().getElements();
+			for (int j = 0; j < packs.size() - 1; j++) {
+				eachPackPath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/resultLayout\"][@index='"
+						+ j + "']//android.widget.TextView[@resource-id=\"in.ireff.android:id/tag\"]";
+				eachPack = elem.xpath(eachPackPath).makeUiElement().getElements();
+				flag = false;
+				for (WebElement eachElem : eachPack) {
+					if (tabLists[i].equalsIgnoreCase("Topup"))
+						if (eachElem.getText().equalsIgnoreCase(tabLists[i])
+								|| eachElem.getText().equalsIgnoreCase("FULL TT")) {
+							flag = true;
+							break;
+						} else {
+							if (eachElem.getText().equalsIgnoreCase(tabLists[i])) {
+								flag = true;
+								break;
+							}
+						}
+				}
+				packPricePath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/resultLayout\"][@index='"
+						+ j + "']//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"]";
+				packPrice = elem.xpath(packPricePath).makeUiElement().getText();
+				if (!flag) {
+					Assert.fail("Category is missing for Rs." + packPrice + " pack");
+				}
+				System.out.println("Passed: " + packPrice);
 			}
 		}
 	}

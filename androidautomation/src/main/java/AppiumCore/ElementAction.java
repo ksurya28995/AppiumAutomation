@@ -49,7 +49,11 @@ public class ElementAction {
 	
 	public List<WebElement> getElements() throws Exception {
 		ElementFinder.locator = "new UiSelector()";
-		return Android.driver.findElementsByXPath(EAlocator);
+		if (EAlocator.contains("new UiSelector()")) {
+			return Android.driver.findElementsByAndroidUIAutomator(EAlocator);
+		} else {
+			return Android.driver.findElementsByXPath(EAlocator);
+		}
 	}
 
 	public void tap() throws Exception {
@@ -146,7 +150,7 @@ public class ElementAction {
 		action.moveTo(getElement()).perform();
 	}
 
-	public void scrollLeftToElem(String scrollElemXpath, int noOfScroll) throws Exception {
+	public void scrollLeftByCount(String scrollElemXpath, int noOfScroll) throws Exception {
 		TouchAction act = new TouchAction(Android.driver);
 		Point pt = getElementByXpath(scrollElemXpath).getLocation();
 		pt.x = pt.getX() + 10;

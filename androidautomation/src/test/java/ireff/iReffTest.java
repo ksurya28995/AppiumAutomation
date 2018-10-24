@@ -19,12 +19,12 @@ public class iReffTest {
 	@Test
 	public void startingTest() throws Exception {
 		ireff_Implements appObj = new ireff_Implements();
-		appObj.validIreff("validLists.csv");
+		appObj.validIreff();
 	}
 
-	@AfterClass
+	/*@AfterClass
 	public static void terminate() throws MalformedURLException {
 		Android.exitDriver();	
-	}
+	}*/
 	
 }

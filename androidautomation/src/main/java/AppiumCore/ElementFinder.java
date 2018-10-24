@@ -14,6 +14,11 @@ public class ElementFinder {
 		return this;
 	}
 
+	public ElementFinder index(int value) {
+		locator += ".index(\""+String.valueOf(value)+"\")";
+		return this;
+	}
+	
 	public ElementFinder text(String value) {
 		locator += ".text(\"" + value + "\")";
 		return this;

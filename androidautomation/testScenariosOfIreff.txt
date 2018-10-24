@@ -1,9 +1,9 @@
 check the list of operators_D
 check the tabs under operator
-check the idea data
-check the full talktime packs
+check the tab data
 check the talktime data
-check the pack details
+check the pack details vs tab data
+check the full talktime packs
 check the search functionality
 check the dth operator
 check the new dth
