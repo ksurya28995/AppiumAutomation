@@ -1,6 +1,5 @@
 package IreffImplements;
 
-import static org.testng.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.Map;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import AppiumCore.CsvHandler;
 import AppiumCore.ElementFinder;
@@ -16,7 +16,8 @@ public class ireff_Implements {
 	private static CsvHandler csvObj = null;
 	private Map<String, String> arrData = new HashMap<String, String>();
 	private ElementFinder elem = new ElementFinder();
-
+	private static SoftAssert asrt =new SoftAssert();
+	
 	/**
 	 * Method is used as a constructor
 	 * 
@@ -48,7 +49,7 @@ public class ireff_Implements {
 					testCount++;
 			}
 		}
-		assertTrue(testCount == arrList.length);
+		asrt.assertTrue(testCount == arrList.length);
 		elem.contDesc("Navigate up").makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/currentServiceLayout").makeUiElement().isDisplayed();
 	}
@@ -72,7 +73,7 @@ public class ireff_Implements {
 				elem.resourceId("in.ireff.android:id/textView").text("Tamil Nadu").makeUiElement().tap();
 			if (arrData.get(operaList[i] + "TabNames").equals("")) {
 				String uiMsg = elem.resourceId("in.ireff.android:id/noContentMessage").makeUiElement().getText();
-				assertTrue(
+				asrt.assertTrue(
 						uiMsg.equalsIgnoreCase("No recharge plans for this operator and circle."));
 				System.out.println(uiMsg);
 			} else {
@@ -85,7 +86,7 @@ public class ireff_Implements {
 								.scrollLeftByCount(tabPath, 5);
 					}
 					uiTabName = elem.resourceId("android:id/text1").text(csvTabNames[j]).makeUiElement().getText();
-					assertTrue( csvTabNames[j].contains(uiTabName));
+					asrt.assertTrue( csvTabNames[j].contains(uiTabName));
 					System.out.println(csvTabNames[j]);
 				}
 			}
@@ -162,7 +163,7 @@ public class ireff_Implements {
 				+ arrData.get("Pack")
 				+ "\"]//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//following-sibling::android.widget.LinearLayout//android.widget.TextView[@text=\""
 				+ arrData.get("Validity") + " days\"]";
-		assertTrue(elem.xpath(validityPath).makeUiElement().isExist());
+		asrt.assertTrue(elem.xpath(validityPath).makeUiElement().isExist());
 		String percent = elem.xpath("//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"][@text=\""
 				+ arrData.get("Pack")
 				+ "\"]//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"in.ireff.android:id/valueIndicator\"]")
@@ -173,30 +174,30 @@ public class ireff_Implements {
 				.makeUiElement().getText();
 		String detailsPath = "//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"][@text=\""+arrData.get("Pack")+"\"]//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"in.ireff.android:id/desc\"]"; 
 		
-		assertTrue(percent.equals(arrData.get("Percentage")));
+		asrt.assertTrue(percent.equals(arrData.get("Percentage")));
 		System.out.println("Percentage check Passed");
 		int packPrice = Integer.parseInt(arrData.get("Pack"));
 		double percentage = Double.parseDouble(arrData.get("Percentage").replaceAll("%", ""));
 		double calcTalktime = packPrice * (percentage / 100);
-		assertTrue( talkTime.equals((int) Math.ceil(calcTalktime) + " Talktime"));
+		asrt.assertTrue( talkTime.equals((int) Math.ceil(calcTalktime) + " Talktime"));
 		System.out.println("Talktime check Passed");
 		String csvDetail1 = arrData.get("PackDetails").split("@")[0];
 		String packDetails = elem.xpath(detailsPath).makeUiElement().getText();
-		assertTrue( packDetails.contains(csvDetail1));
+		asrt.assertTrue( packDetails.contains(csvDetail1));
 		System.out.println("Pack Details check passed");
 		
 		elem.xpath(detailsPath).makeUiElement().tap();
 		String uiPackPrice = elem.resourceId("in.ireff.android:id/price").makeUiElement().getText();
-		assertTrue(uiPackPrice.equals(arrData.get("Pack")));
+		asrt.assertTrue(uiPackPrice.equals(arrData.get("Pack")));
 		System.out.println("Inside Pack Price check passed");
 		String uiValidity = elem.resourceId("in.ireff.android:id/validity").makeUiElement().getText();
-		assertTrue(uiValidity.equals(arrData.get("Validity")+" days"));
+		asrt.assertTrue(uiValidity.equals(arrData.get("Validity")+" days"));
 		System.out.println("Inside Pack validity check passed");
 		String uiTalktime = elem.resourceId("in.ireff.android:id/talktime").makeUiElement().getText();
-		assertTrue(uiTalktime.equals((int) Math.ceil(calcTalktime) + " Talktime"));
+		asrt.assertTrue(uiTalktime.equals((int) Math.ceil(calcTalktime) + " Talktime"));
 		System.out.println("Inside Pack talktime check passed");
 		String uiPercent = elem.resourceId("in.ireff.android:id/valueIndicator").makeUiElement().getText();
-		assertTrue(uiPercent.equals(arrData.get("Percentage")));
+		asrt.assertTrue(uiPercent.equals(arrData.get("Percentage")));
 		System.out.println("Inside Pack percentage check passed");
 		String uiDetailsPath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/detailItemsLayout\"]/android.widget.TextView[@resource-id=\"in.ireff.android:id/detailEntry\"][3]";
 		String uiDetails = elem.xpath(uiDetailsPath).makeUiElement().getText();
@@ -204,7 +205,7 @@ public class ireff_Implements {
 		csvDetail2 = csvDetail2.replaceAll("<rupees>", String.valueOf(Math.ceil(calcTalktime)));
 		System.out.println(uiDetails);
 		System.out.println(csvDetail2);
-		assertTrue(uiDetails.equals(csvDetail2)); 
+		asrt.assertTrue(uiDetails.equals(csvDetail2)); 
 		System.out.println("Inside Pack details check passed");
 	}
 

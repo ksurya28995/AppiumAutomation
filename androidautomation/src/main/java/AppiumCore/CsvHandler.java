@@ -1,7 +1,5 @@
 package AppiumCore;
 
-import static org.testng.Assert.assertTrue;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,8 +9,11 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.testng.asserts.SoftAssert;
+
 public class CsvHandler {
 
+	private static SoftAssert asrt = new SoftAssert();
 	URI filePath;
 	/**
 	 * Method is used to read the csv file and map the values to a mapping object
@@ -63,7 +64,7 @@ public class CsvHandler {
 			br.close();
 			String[] headers = line1.split(";", -1);
 			String[] values = line2.split(";", -1);
-			assertTrue(headers.length == values.length);
+			asrt.assertTrue(headers.length == values.length);
 			for (int i = 0; i < headers.length; i++) {
 				tabArray.put(headers[i], values[i]);
 			}
@@ -94,7 +95,7 @@ public class CsvHandler {
 			br.close();
 			// replace the value in the column
 			Map<String, String> arrData = readCsvData(csvName);
-			assertTrue(arrData.containsKey(clmnName));
+			asrt.assertTrue(arrData.containsKey(clmnName));
 			arrData.replace(clmnName, value);
 			// get ready the data to write in csv
 			for (int i = 0; i < keysArray.length; i++) {
