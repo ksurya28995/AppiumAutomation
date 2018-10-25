@@ -1,6 +1,6 @@
 package AppiumCore;
 
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -63,7 +63,7 @@ public class CsvHandler {
 			br.close();
 			String[] headers = line1.split(";", -1);
 			String[] values = line2.split(";", -1);
-			assertTrue("Error in CSV file", headers.length == values.length);
+			assertTrue(headers.length == values.length);
 			for (int i = 0; i < headers.length; i++) {
 				tabArray.put(headers[i], values[i]);
 			}
@@ -94,7 +94,7 @@ public class CsvHandler {
 			br.close();
 			// replace the value in the column
 			Map<String, String> arrData = readCsvData(csvName);
-			assertTrue("Column name \"" + clmnName + "\" not found", arrData.containsKey(clmnName));
+			assertTrue(arrData.containsKey(clmnName));
 			arrData.replace(clmnName, value);
 			// get ready the data to write in csv
 			for (int i = 0; i < keysArray.length; i++) {
