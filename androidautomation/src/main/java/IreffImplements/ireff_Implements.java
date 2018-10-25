@@ -99,7 +99,6 @@ public class ireff_Implements {
 				eachPackPath = "//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"][@text='"
 						+ csvPacks[j]
 						+ "']//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/priceValidityParentLayout\"]/following-sibling::android.widget.LinearLayout/android.widget.LinearLayout[1]//android.widget.TextView";
-				System.out.println("packing: " + csvPacks[j]);
 				eachPack = elem.xpath(eachPackPath).makeUiElement().getElements();
 				for (WebElement eachElem : eachPack) {
 					if (tabLists[i].equalsIgnoreCase("Topup")) {
@@ -119,10 +118,10 @@ public class ireff_Implements {
 					System.out.println("Passed: " + csvPacks[j]);
 				else
 					Assert.fail("Rs. " + csvPacks[j] + " pack is missing the category");
-				if (!isScrollEnds)
-					System.out.println("scroll");
+				if (!isScrollEnds) {
 					isScrollEnds = elem.xpath(eachPackPath).makeUiElement()
 							.scrollDownTillDisappears("//android.widget.ListView[@resource-id=\"android:id/list\"]");
+				}
 			}
 		}
 	}

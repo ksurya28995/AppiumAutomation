@@ -1,6 +1,6 @@
 check the list of operators_D
-check the tabs under operator
-check the tab data
+check the tabs under operator_D
+check the tab data_D
 check the talktime data
 check the pack details vs tab data
 check the full talktime packs
