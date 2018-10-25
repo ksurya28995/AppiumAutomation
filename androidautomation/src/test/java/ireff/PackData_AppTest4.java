@@ -2,9 +2,9 @@ package ireff;
 
 import java.net.MalformedURLException;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import AppiumCore.Android;
 import IreffImplements.ireff_Implements;

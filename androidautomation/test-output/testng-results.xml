@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="391184" started-at="2018-10-25T16:31:57Z" finished-at="2018-10-25T16:38:28Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="391184" started-at="2018-10-25T16:31:57Z" finished-at="2018-10-25T16:38:28Z">
+      <class name="ireff.OperatorTabs_AppTest2">
+        <test-method status="PASS" signature="init()[pri:0, instance:ireff.OperatorTabs_AppTest2@4667ae56]" name="init" is-config="true" duration-ms="8153" started-at="2018-10-25T16:36:29Z" finished-at="2018-10-25T16:36:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="startingTest()[pri:0, instance:ireff.OperatorTabs_AppTest2@4667ae56]" name="startingTest" duration-ms="106157" started-at="2018-10-25T16:36:37Z" finished-at="2018-10-25T16:38:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startingTest -->
+        <test-method status="PASS" signature="terminate()[pri:0, instance:ireff.OperatorTabs_AppTest2@4667ae56]" name="terminate" is-config="true" duration-ms="5158" started-at="2018-10-25T16:38:23Z" finished-at="2018-10-25T16:38:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- terminate -->
+      </class> <!-- ireff.OperatorTabs_AppTest2 -->
+      <class name="ireff.OperatorsList_AppTest1">
+        <test-method status="PASS" signature="init()[pri:0, instance:ireff.OperatorsList_AppTest1@1a968a59]" name="init" is-config="true" duration-ms="8451" started-at="2018-10-25T16:36:10Z" finished-at="2018-10-25T16:36:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="startingTest()[pri:0, instance:ireff.OperatorsList_AppTest1@1a968a59]" name="startingTest" duration-ms="5203" started-at="2018-10-25T16:36:18Z" finished-at="2018-10-25T16:36:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startingTest -->
+        <test-method status="PASS" signature="terminate()[pri:0, instance:ireff.OperatorsList_AppTest1@1a968a59]" name="terminate" is-config="true" duration-ms="5335" started-at="2018-10-25T16:36:23Z" finished-at="2018-10-25T16:36:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- terminate -->
+      </class> <!-- ireff.OperatorsList_AppTest1 -->
+      <class name="ireff.PackData_AppTest4">
+        <test-method status="PASS" signature="init()[pri:0, instance:ireff.PackData_AppTest4@548e7350]" name="init" is-config="true" duration-ms="8016" started-at="2018-10-25T16:35:43Z" finished-at="2018-10-25T16:35:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="startingTest()[pri:0, instance:ireff.PackData_AppTest4@548e7350]" name="startingTest" duration-ms="12457" started-at="2018-10-25T16:35:52Z" finished-at="2018-10-25T16:36:04Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startingTest -->
+        <test-method status="PASS" signature="terminate()[pri:0, instance:ireff.PackData_AppTest4@548e7350]" name="terminate" is-config="true" duration-ms="5699" started-at="2018-10-25T16:36:04Z" finished-at="2018-10-25T16:36:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- terminate -->
+      </class> <!-- ireff.PackData_AppTest4 -->
+      <class name="ireff.TabData_AppTest3">
+        <test-method status="PASS" signature="init()[pri:0, instance:ireff.TabData_AppTest3@5442a311]" name="init" is-config="true" duration-ms="10428" started-at="2018-10-25T16:31:57Z" finished-at="2018-10-25T16:32:07Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="startingTest()[pri:0, instance:ireff.TabData_AppTest3@5442a311]" name="startingTest" duration-ms="211048" started-at="2018-10-25T16:32:07Z" finished-at="2018-10-25T16:35:38Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startingTest -->
+        <test-method status="PASS" signature="terminate()[pri:0, instance:ireff.TabData_AppTest3@5442a311]" name="terminate" is-config="true" duration-ms="5029" started-at="2018-10-25T16:35:38Z" finished-at="2018-10-25T16:35:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- terminate -->
+      </class> <!-- ireff.TabData_AppTest3 -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
