@@ -1,1 +1,4 @@
-Import project as a maven project
+Step 1: Import project as a maven project
+Step 2: Run the appium server
+Step 3: Change the platform version(eg, 8.0 or 8.1) according to the Mobile device/emulator you are using in the "androidConfig.properties"(try xamarin android emulator, my preference)
+Step 4: run testcase using Junit. 

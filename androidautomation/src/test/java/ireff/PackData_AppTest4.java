@@ -23,9 +23,9 @@ public class PackData_AppTest4 {
 		appObj.validPacksData("validPackData.csv");
 	}
 
-	/*@AfterClass
+	@AfterClass
 	public static void terminate() throws MalformedURLException {
 		Android.exitDriver();	
-	}*/
+	}
 	
 }

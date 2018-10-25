@@ -17,10 +17,22 @@ public class ireff_Implements {
 	private Map<String, String> arrData = new HashMap<String, String>();
 	private ElementFinder elem = new ElementFinder();
 
+	/**
+	 * Method is used as a constructor
+	 * 
+	 * @author SuryaRay
+	 */
 	public ireff_Implements() {
 		csvObj = new CsvHandler();
 	}
-
+	
+	/**
+	 * Method is used to validate the operators list 
+	 * 
+	 * @param supportCSv - input csv Name
+	 *  
+	 * @author SuryaRay
+	 */
 	public void validNewOperatorsList(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
 		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();
@@ -41,6 +53,11 @@ public class ireff_Implements {
 		elem.resourceId("in.ireff.android:id/currentServiceLayout").makeUiElement().isDisplayed();
 	}
 
+	/**
+	 * Method is used to validate the tab names of all the operators
+	 * 
+	 * @author SuryaRay
+	 */
 	public void validOperaTabs(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
 		String[] operaList = arrData.get("OperatorLists").split("@");
@@ -75,9 +92,14 @@ public class ireff_Implements {
 		}
 	}
 
+	/**
+	 * Method is used to validate the tab data of all the tabs
+	 * 
+	 * @author SuryaRay
+	 */
 	public void validTabData(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
-		String[] tabLists = arrData.get("IdeaTabNames").split("@");
+		String[] tabLists = arrData.get("TabNames").split("@");
 		String eachPackPath = null;
 		List<WebElement> eachPack = null;
 		boolean checkFlag;
@@ -118,12 +140,17 @@ public class ireff_Implements {
 					Assert.fail("Rs. " + csvPacks[j] + " pack is missing the category");
 				if (!isScrollEnds) {
 					isScrollEnds = elem.xpath(eachPackPath).makeUiElement()
-							.scrollDownTillDisappears("//android.widget.ListView[@resource-id=\"android:id/list\"]");
+							.scrollUpTillDisappears("//android.widget.ListView[@resource-id=\"android:id/list\"]");
 				}
 			}
 		}
 	}
 
+	/**
+	 * Method is used to validate the packs details
+	 * 
+	 * @author SuryaRay
+	 */
 	public void validPacksData(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
 		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();

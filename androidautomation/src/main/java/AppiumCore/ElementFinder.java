@@ -1,5 +1,10 @@
 package AppiumCore;
 
+/**
+ * class is used to form the path of the element
+ * 
+ * @author SuryaRay
+ */
 public class ElementFinder {
 
 	public static String locator = "new UiSelector()";

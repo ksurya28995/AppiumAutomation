@@ -14,13 +14,27 @@ public class Android {
 
 	public static AndroidDriver driver;
 	public static int waitTime = 30000;
-
+	
+	/**
+	 * Method is used to initialize the android driver
+	 * 
+	 * @param appName name of the app
+	 * 
+	 * @author SuryaRay
+	 */
 	public static AndroidDriver initDriver(String appName) throws MalformedURLException, InterruptedException {
 		driver = new AndroidDriver(new URL(PropertyManager.getPropertyValue("androiddriverurl")),
 				getDevCapabilities(appName));
 		return driver;
 	}
 	
+	/**
+	 * Method is used to set the desired capabilities of the device
+	 * 
+	 * @param appName name of the app
+	 * 
+	 * @author SuryaRay
+	 */
 	public static DesiredCapabilities getDevCapabilities(String appName) {
 		String appComName = appName + "package";
 		String appMainActivity = appName + "mainactivity";
@@ -35,6 +49,11 @@ public class Android {
 		return capability;
 	}
 
+	/**
+	 * Method is used to uninstall the appium support apps and terminate the driver
+	 * 
+	 * @author SuryaRay
+	 */
 	public static void exitDriver() throws MalformedURLException {
 		driver.pressKeyCode(AndroidKeyCode.HOME);
 		System.err.println("Uninstalling appium support apps on the device..");

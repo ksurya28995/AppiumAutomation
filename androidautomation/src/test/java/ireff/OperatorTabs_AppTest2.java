@@ -23,9 +23,9 @@ public class OperatorTabs_AppTest2 {
 		appObj.validOperaTabs("validLists.csv");
 	}
 
-	/*@AfterClass
+	@AfterClass
 	public static void terminate() throws MalformedURLException {
 		Android.exitDriver();	
-	}*/
+	}
 	
 }

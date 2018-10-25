@@ -1,10 +1,13 @@
-Note 1:
+Note 1A:
 To get the "appPackage(technical name by developer)" and "appActivity(mainActivity -> the mainPage activity)"
 { get phone under adb devices, keep the app open }
-
 CMD commmands:
-# adb shell
-# dumpsys window windows|grep -E 'mCurrentFocus'
+adb shell dumpsys window windows | findstr Focus
+
+(OR) 
+
+Note 1B:
+use "AppInfo" form play store
 
 Note 2:
 Use lovely android emulator - "XAMARIN", awesome!!

@@ -1,10 +1,4 @@
 check the list of operators_D
 check the tabs under operator_D
 check the tab data_D
-check the talktime data
-check the pack details vs tab data
-check the full talktime packs
-check the search functionality
-check the dth operator
-check the new dth
-	
+check the talktime, compare pack details & tab data_D

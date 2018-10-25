@@ -23,9 +23,9 @@ public class OperatorsList_AppTest1 {
 		appObj.validNewOperatorsList("validLists.csv");
 	}
 
-	/*@AfterClass
+	@AfterClass
 	public static void terminate() throws MalformedURLException {
 		Android.exitDriver();	
-	}*/
+	}
 	
 }

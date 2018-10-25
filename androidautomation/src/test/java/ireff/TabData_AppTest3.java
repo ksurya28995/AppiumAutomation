@@ -23,9 +23,9 @@ public class TabData_AppTest3 {
 		appObj.validTabData("validTabData.csv");
 	}
 
-	/*@AfterClass
+	@AfterClass
 	public static void terminate() throws MalformedURLException {
 		Android.exitDriver();	
-	}*/
+	}
 	
 }
