@@ -21,12 +21,6 @@ public class ireff_Implements {
 		csvObj = new CsvHandler();
 	}
 
-	public void validIreff() throws Exception {
-		// validNewOperatorsList("validLists.csv");
-		// validOperaTabs("validLists.csv");
-		validTabData("validTabData.csv");
-	}
-
 	public void validNewOperatorsList(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
 		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();
@@ -89,6 +83,10 @@ public class ireff_Implements {
 		boolean checkFlag;
 		boolean isScrollEnds;
 		String[] csvPacks = null;
+		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();
+		elem.resourceId("in.ireff.android:id/imageView" + arrData.get("Operator")).makeUiElement().tap();
+		elem.resourceId("in.ireff.android:id/textView").text("Tamil Nadu").makeUiElement().tap();
+		
 		for (int i = 0; i < tabLists.length; i++) {
 			isScrollEnds = false;
 			elem.resourceId("android:id/text1").text(tabLists[i]).makeUiElement().tap();
@@ -124,6 +122,63 @@ public class ireff_Implements {
 				}
 			}
 		}
+	}
+
+	public void validPacksData(String supportCSV) throws Exception {
+		arrData = csvObj.readCsvData(supportCSV);
+		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();
+		elem.resourceId("in.ireff.android:id/imageView" + arrData.get("Operator")).makeUiElement().tap();
+		elem.resourceId("in.ireff.android:id/textView").text("Tamil Nadu").makeUiElement().tap();
+		elem.resourceId("android:id/text1").text(arrData.get("PackSession")).makeUiElement().tap();
+		
+		String validityPath = "//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"][@text=\""
+				+ arrData.get("Pack")
+				+ "\"]//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//following-sibling::android.widget.LinearLayout//android.widget.TextView[@text=\""
+				+ arrData.get("Validity") + " days\"]";
+		assertTrue("Validity not found", elem.xpath(validityPath).makeUiElement().isExist());
+		String percent = elem.xpath("//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"][@text=\""
+				+ arrData.get("Pack")
+				+ "\"]//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"in.ireff.android:id/valueIndicator\"]")
+				.makeUiElement().getText();
+		String talkTime = elem.xpath("//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"][@text=\""
+				+ arrData.get("Pack")
+				+ "\"]//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"in.ireff.android:id/talktime\"]")
+				.makeUiElement().getText();
+		String detailsPath = "//android.widget.TextView[@resource-id=\"in.ireff.android:id/price\"][@text=\""+arrData.get("Pack")+"\"]//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout//parent::android.widget.LinearLayout/following-sibling::android.widget.LinearLayout//android.widget.TextView[@resource-id=\"in.ireff.android:id/desc\"]"; 
+		
+		assertTrue("Percentage is incorrect", percent.equals(arrData.get("Percentage")));
+		System.out.println("Percentage check Passed");
+		int packPrice = Integer.parseInt(arrData.get("Pack"));
+		double percentage = Double.parseDouble(arrData.get("Percentage").replaceAll("%", ""));
+		double calcTalktime = packPrice * (percentage / 100);
+		assertTrue("Talktime is incorrect", talkTime.equals((int) Math.ceil(calcTalktime) + " Talktime"));
+		System.out.println("Talktime check Passed");
+		String csvDetail1 = arrData.get("PackDetails").split("@")[0];
+		String packDetails = elem.xpath(detailsPath).makeUiElement().getText();
+		assertTrue("Pack Details is incorrect", packDetails.contains(csvDetail1));
+		System.out.println("Pack Details check passed");
+		
+		elem.xpath(detailsPath).makeUiElement().tap();
+		String uiPackPrice = elem.resourceId("in.ireff.android:id/price").makeUiElement().getText();
+		assertTrue("Pack price is incorrect", uiPackPrice.equals(arrData.get("Pack")));
+		System.out.println("Inside Pack Price check passed");
+		String uiValidity = elem.resourceId("in.ireff.android:id/validity").makeUiElement().getText();
+		assertTrue("Pack validity is incorrect", uiValidity.equals(arrData.get("Validity")+" days"));
+		System.out.println("Inside Pack validity check passed");
+		String uiTalktime = elem.resourceId("in.ireff.android:id/talktime").makeUiElement().getText();
+		assertTrue("Pack talktime is incorrect", uiTalktime.equals((int) Math.ceil(calcTalktime) + " Talktime"));
+		System.out.println("Inside Pack talktime check passed");
+		String uiPercent = elem.resourceId("in.ireff.android:id/valueIndicator").makeUiElement().getText();
+		assertTrue("Pack percentage is incorrect", uiPercent.equals(arrData.get("Percentage")));
+		System.out.println("Inside Pack percentage check passed");
+		String uiDetailsPath = "//android.widget.LinearLayout[@resource-id=\"in.ireff.android:id/detailItemsLayout\"]/android.widget.TextView[@resource-id=\"in.ireff.android:id/detailEntry\"][3]";
+		String uiDetails = elem.xpath(uiDetailsPath).makeUiElement().getText();
+		String csvDetail2 = arrData.get("PackDetails").split("@")[1];
+		csvDetail2 = csvDetail2.replaceAll("<rupees>", String.valueOf(Math.ceil(calcTalktime)));
+		System.out.println(uiDetails);
+		System.out.println(csvDetail2);
+		assertTrue("Details of the pack is incorrect", uiDetails.equals(csvDetail2)); 
+		System.out.println("Inside Pack details check passed");
 	}
 
 }
