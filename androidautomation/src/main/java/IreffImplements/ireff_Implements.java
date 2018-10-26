@@ -36,6 +36,7 @@ public class ireff_Implements {
 	 */
 	public void validNewOperatorsList(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
+		elem.resourceId("in.ireff.android:id/skipTextView").makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();
 		String[] operList = elem.xpath(
 				"//android.widget.LinearLayout[contains(@resource-id,'in.ireff.android:id/layout')]/android.widget.ImageView")
@@ -61,6 +62,7 @@ public class ireff_Implements {
 	 */
 	public void validOperaTabs(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
+		elem.resourceId("in.ireff.android:id/skipTextView").makeUiElement().tap();
 		String[] operaList = arrData.get("OperatorLists").split("@");
 		for (int i = 0; i < operaList.length; i++) {
 			System.out.println("");
@@ -106,6 +108,7 @@ public class ireff_Implements {
 		boolean checkFlag;
 		boolean isScrollEnds;
 		String[] csvPacks = null;
+		elem.resourceId("in.ireff.android:id/skipTextView").makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/imageView" + arrData.get("Operator")).makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/textView").text("Tamil Nadu").makeUiElement().tap();
@@ -154,6 +157,7 @@ public class ireff_Implements {
 	 */
 	public void validPacksData(String supportCSV) throws Exception {
 		arrData = csvObj.readCsvData(supportCSV);
+		elem.resourceId("in.ireff.android:id/skipTextView").makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/imageView1").makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/imageView" + arrData.get("Operator")).makeUiElement().tap();
 		elem.resourceId("in.ireff.android:id/textView").text("Tamil Nadu").makeUiElement().tap();

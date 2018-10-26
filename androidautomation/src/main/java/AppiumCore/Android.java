@@ -43,7 +43,7 @@ public class Android {
 		capability.setCapability(MobileCapabilityType.PLATFORM_VERSION, PropertyManager.getPropertyValue("platformversion"));
 		capability.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
 		capability.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
-		capability.setCapability("noReset", "true");
+		capability.setCapability("noReset", "false");
 		capability.setCapability("appPackage", PropertyManager.getPropertyValue(appComName.toLowerCase()));
 		capability.setCapability("appActivity", PropertyManager.getPropertyValue(appMainActivity.toLowerCase()));
 		return capability;
