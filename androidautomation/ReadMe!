@@ -1,5 +1,6 @@
 Step 1: Import project as a maven project
 Step 2: Run the appium server
 Step 3: Change the platform version(eg, 8.0 or 8.1) according to the Mobile device/emulator you are using in the "androidConfig.properties"(try xamarin android emulator, my preference)
-Step 4: run testcase using testng.
-Step 5: run test on jenkins with ireffTestng.xml file  
+Step 4: Install the app "iReff 5.0.2" in the device and open it. Also important to Skip the initial screen first.
+Step 4: Run testcase using testng.
+Step 5: Run test on jenkins with ireffTestng.xml file  
